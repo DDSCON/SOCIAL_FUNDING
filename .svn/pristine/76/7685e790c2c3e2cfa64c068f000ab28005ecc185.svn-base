@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a2team.yang.jae.project.mybatis.ProjectMapper">
+
+	<select id="newGetProject" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	    SELECT 	seq
+	    FROM project
+	    WHERE seq = (SELECT max(seq) from project)
+	    
+	</select>
+	
+	<select id="getAllMember" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	    SELECT 	*
+	    FROM member
+	    WHERE email = #{email}
+	</select>
+	
+
+
+	<select id="getAllMain" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	    SELECT 	*
+	    FROM project left join member on
+	    project.m_seq=member.seq
+	    WHERE project.m_seq=member.seq
+	    <if test="null != seq">
+	    AND project.seq = #{seq}
+	    </if>
+	</select>
+	
+	
+	<select id="getAllOption" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	    SELECT 	*, 
+	    format(o_money1,0) 
+		AS o_money_one ,
+		format(o_money2,0) 
+		AS o_money_two ,
+		format(o_money3,0) 
+		AS o_money_three ,
+		format(o_money4,0) 
+		AS o_money_four
+	    FROM project_option
+	     <if test="null != seq">
+	    WHERE p_seq = #{seq}
+	    </if> 
+	</select>
+	
+	<select id="getAllTeam" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+        SELECT 	*
+	    FROM project left join team on 
+	    project.t_seq = team.seq
+	    WHERE project.t_seq = team.seq
+	    <if test="null != seq">
+	    AND project.seq = #{seq}
+	    </if>
+	</select>
+	   
+	
+	
+	
+	<select id="getAllProject" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	    SELECT 	*
+	    FROM project_update
+	    <if test="null != seq">
+	    WHERE p_seq = #{seq}
+	    </if>
+	    ORDER BY reg_date desc
+	</select>
+	
+	<select id="getAllComment" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	    SELECT 	*
+	    FROM project_comment
+	    <if test="null != seq">
+	    WHERE p_seq = #{seq}
+	    </if>
+	    ORDER BY d_seq desc
+	</select>
+	
+ 	<select id="getAllPayment" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	    SELECT 	*, format(pay_money,0) 
+		AS pay_money_sum
+	    FROM payment left join member on
+      	payment.m_seq=member.seq
+	    WHERE payment.m_seq=member.seq
+	    <if test="null != seq">
+	   AND payment.p_seq = ${seq}
+	    </if> 
+	    ORDER BY payment.pay_date desc
+	</select>
+	
+	
+	<select id="getAllPaystatus" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT *, format(f_goal,0) 
+		AS f_goal_sum ,
+		format(funded,0)
+		AS funded_sum 		
+		FROM STATUS_VIEW1
+		<if test="null != seq">
+	    WHERE seq = #{seq}
+	    </if>
+	</select>
+	
+	<select id="getAllCounts" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	    SELECT 	count(*) as count
+	    FROM payment left join member on
+      payment.m_seq=member.seq
+	    WHERE payment.m_seq=member.seq
+	    <if test="null != seq">
+	   AND payment.p_seq = ${seq}
+	    </if> 
+	</select>
+
+<!-- select *
+		from member left join
+		member_detail on
+		member.seq=member_detail.m_seq
+		<if test="seq!=null">
+			where member.seq = #{seq}
+		</if> -->
+
+	<select id="getemail" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+	    SELECT email
+	    FROM member
+	    where m_seq=#{m_seq}
+	    
+	</select>
+	<select id="certification_mail" resultType="int" parameterType="java.util.HashMap">
+	   
+	    SELECT email_check
+	    FROM member
+	    WHERE email = #{email}
+	    AND email_check = #{email_check}
+	    
+	    
+	</select>
+	
+
+	
+<insert id="insertTeam" parameterType="java.util.HashMap">
+		INSERT INTO team (
+			profile_photo
+			,c_profile_photo
+		  	,team_name
+		  	,team_Biography
+		) VALUES (
+		  #{profile_photo}
+		  ,#{c_profile_photo}
+		  ,#{team_name}
+		  ,#{team_Biography}
+		)
+	</insert>
+	
+
+	
+	
+	
+	
+	
+<insert id="insertProject" parameterType="java.util.HashMap">
+		
+		INSERT INTO project (
+			image
+			,m_seq
+			,c_image
+			,t_seq
+		  	,title
+		  	,blurb
+		  	,category
+		  	,location
+		  	,location_address
+		  	,f_duration
+		  	,f_year
+		  	,f_month
+		  	,f_day
+		  	,f_goal
+		  	,video
+		  	,c_video
+		  	,description
+		  	,risk_and_challenge
+		  	,facebook
+		  	,web_site
+		  	,contact_detail_email
+		  	,contact_detail_phone
+		) VALUES (
+		  #{image} 
+		  ,#{m_seq}
+		  ,#{c_image}
+		  ,LAST_INSERT_ID()
+		  ,#{title}
+		  ,#{blurb}
+		  ,#{category}
+		  ,#{location}
+		  ,#{location_address}
+		  ,#{f_duration}
+		  ,#{f_year}
+		  ,#{f_month}
+		  ,#{f_day}
+		  ,#{f_goal}
+		  ,#{video}
+		  ,#{c_video}
+		  ,#{description}
+		  ,#{risk_and_challenge}
+		  ,#{facebook}
+		  ,#{web_site}
+		  ,#{contact_detail_email}
+		  ,#{contact_detail_phone}
+		)
+	</insert>
+	
+	
+<insert id="insertOption" parameterType="java.util.HashMap">
+		INSERT INTO project_option (
+			o_money0
+			,o_description0
+			,o_money1
+			,p_seq
+		  	,o_description1
+		  	,o_year
+		  	,o_month
+		  	,o_day
+		  	,o_money2
+		  	,o_description2
+		  	,o_money3
+		  	,o_description3
+		  	,o_money4
+		  	,o_description4
+		) VALUES (
+		  #{o_money0}
+		  ,#{o_description0}
+		  ,#{o_money1}
+		  ,LAST_INSERT_ID()
+		  ,#{o_description1}
+		  ,#{o_year}
+		  ,#{o_month}
+		  ,#{o_day}
+		  ,#{o_money2}
+		  ,#{o_description2}
+		  ,#{o_money3}
+		  ,#{o_description3}
+		  ,#{o_money4}
+		  ,#{o_description4}
+		)
+	</insert>
+	
+	
+	
+		<insert id="insertComment" parameterType="java.util.HashMap">
+		INSERT INTO project_comment (
+		  	 p_seq
+		  	 ,m_name
+		  	,update_comment
+		) VALUES (
+			#{p_seq}
+		   ,#{m_name}
+		  ,#{update_comment}
+		)
+	</insert>
+	
+	<delete id="deleteComment" parameterType="java.util.HashMap">
+		DELETE FROM project_comment
+		WHERE d_seq = #{d_seq} 
+	</delete>
+ 	<update id="updateComment" parameterType="java.util.HashMap">
+		UPDATE project_comment SET
+		update_comment = #{update_comment}
+		
+		WHERE d_seq = #{d_seq}
+	</update> 
+	
+		<insert id="insertUpdate" parameterType="java.util.HashMap">
+		INSERT INTO project_update (
+			p_seq
+		  	,description
+		) VALUES (
+		 #{p_seq}
+		  ,#{description}
+		)
+	</insert>
+	
+	<update id="insert_Certification_Mail" parameterType="java.util.HashMap">
+		UPDATE member SET
+		  email_check = #{email_check}
+		  WHERE email = #{email}
+	</update>
+	
+	<update id="updateProject" parameterType="java.util.HashMap">
+		UPDATE project SET
+		  name = #{name}
+		  ,id = #{id}
+		  ,password = #{password}
+		  ,phone = #{phone}
+		WHERE seq = #{seq}
+	</update>
+	
+
+	
+	<select id="selectProjectCard" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT *
+			  , sum(pay_money) AS funded
+			  , format(sum(pay_money), 0) AS funded_money
+			  , format(f_goal, 0) AS f_goal_money
+			  , datediff(f_duration, now()) as d_day
+			  , format((100*sum(pay_money)/f_goal), 0) AS current_rate
+			  , count(*) AS count
+		FROM STATUS_VIEW2
+		<if test="null != category">
+	    WHERE category = #{category}
+	    </if>
+	    GROUP BY p_seq
+		ORDER BY sum(pay_money)/f_goal desc
+		LIMIT 4	
+	</select>
+	
+	<select id="selectNewProjectCard" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT *
+			  , format(funded, 0) AS funded_money
+			  , format(f_goal, 0) AS f_goal_money
+			  , datediff(f_duration, now()) as d_day
+			  , format((100*funded/f_goal), 0) AS current_rate
+		FROM STATUS_VIEW1
+		<if test="null != category">
+	    WHERE category = #{category}
+	    </if>
+	    GROUP BY p_seq
+		ORDER BY reg_date desc
+		LIMIT 4	
+	</select>
+	
+	<select id="getAllNewProjectCard" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT *
+			  , format(funded, 0) AS funded_money
+			  , format(f_goal, 0) AS f_goal_money
+			  , datediff(f_duration, now()) as d_day
+			  , format((100*funded/f_goal), 0) AS current_rate
+		FROM STATUS_VIEW1
+		<if test="null != category">
+	    WHERE category = #{category}
+	    </if>
+	    GROUP BY p_seq
+		ORDER BY reg_date desc
+	</select>
+	
+	<select id="selectMostProjectCard" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT *
+			  , sum(pay_money) AS funded
+			  , format(sum(pay_money), 0) AS funded_money
+			  , format(f_goal, 0) AS f_goal_money
+			  , datediff(f_duration, now()) as d_day
+			  , format((100*sum(pay_money)/f_goal), 0) AS current_rate
+			  , count(*) AS count
+		FROM STATUS_VIEW2
+		<if test="null != category">
+	    WHERE category = #{category}
+	    </if>
+	    GROUP BY p_seq
+		ORDER BY count desc
+		LIMIT 4	
+	</select>
+	
+	<select id="getAllCategory" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT *
+		FROM category
+	</select>
+	
+	<select id="getCategoryProject" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT category.seq
+      		  ,category.name
+      		  ,status_view2.seq AS pSeq
+      		  ,sum(status_view2.pay_money) AS funded
+      		  ,status_view2.f_goal
+      		  ,format(sum(status_view2.pay_money), 0) AS funded_money
+     		  ,format(status_view2.f_goal, 0) AS f_goal_money
+      		  ,status_view2.title
+      		  ,status_view2.blurb
+      		  ,status_view2.c_image
+      		  ,datediff(f_duration, now()) AS d_day
+      		  ,format((100*sum(status_view2.pay_money)/f_goal), 0) AS current_rate
+		FROM category
+		LEFT JOIN status_view2
+		ON category.name = status_view2.category
+		GROUP BY status_view2.category, p_seq
+		ORDER BY category.seq
+	</select>
+</mapper>

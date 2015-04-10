@@ -1,0 +1,90 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="/resources/css/footer.css" media="screen" rel="stylesheet" type="text/css" />
+
+</head>
+
+
+<body>
+<footer><!-- Defining the footer section of the page -->
+	<div class="footer" style="padding-left: 200px;">
+	    <div class="footer_wrap container">
+	        <div class="wcont">
+	            <h3 class="title">회사 소개</h3>
+	            <ul>
+	                <li><a href="#" title="link 1">Funday 란?</a></li>
+	                <li><a href="#" title="link 2">만든 사람들</a></li>
+	                <li><a href="#" title="link 3">언론에 소개된 Funday</a></li>
+	                <li><a href="#" title="link 4">채용정보</a></li>
+	                <li><a href="#" title="link 5">사이트 이용 통계</a></li>
+	            </ul>
+	        </div>
+	        
+	        
+	        <div class="wcont">
+	            <h3 class="title">고객지원</h3>
+	            <ul>
+	                <li><a href="#" title="link 1">공지 사항</a></li>
+	                <li><a href="#" title="link 2">FAQ 및 문의</a></li>
+	                <li><a href="#" title="link 3">이용가이드</a></li>
+	                <li><a href="#" title="link 4">약관 및 개인정보 보호정책</a></li>
+	            </ul>
+	        </div>
+	        
+	        
+	        
+	        <div class="wcont">
+	            <h3 class="title">프로젝트 카테고리</h3>
+	            <ul class="foot_ul">
+	                <li><a href="/projectCategory?category=art" title="link 1" id="a_ul">Art</a></li>
+	                <li><a href="/projectCategory?category=dance" title="link 2">Dance</a></li>
+	                <li><a href="/projectCategory?category=fashion" title="link 3">Fashion</a></li>
+	                <li><a href="/projectCategory?category=game" title="link 4">Game</a></li>
+	                <li><a href="/projectCategory?category=health" title="link 4">Health</a></li>
+	                <li><a href="/projectCategory?category=history" title="link 4">History</a></li>
+	            </ul>
+	            <ul>
+	                <li><a href="/projectCategory?category=kid" title="link 1">Kid</a></li>
+	                <li><a href="/projectCategory?category=music" title="link 2">Music</a></li>
+	                <li><a href="/projectCategory?category=nonprofit" title="link 3">Nonprofit</a></li>
+	                <li><a href="/projectCategory?category=software" title="link 4">Software</a></li>
+	                <li><a href="/projectCategory?category=technology" title="link 4">Technology</a></li>
+	                <li><a href="/projectCategory?category=theater" title="link 4">Theater</a></li>
+	                <li><a href="/projectCategory?category=travel" title="link 4">Travel</a></li>
+	            </ul>
+	        </div>
+	        
+	        
+	        
+	        
+	        <div class="wcont">
+	            <h3 class="title">SNS</h3>
+	            <ul>
+	                <li><a href="http://www.facebook.com/" class="b-keep_in_touch__item__link--facebook" title="Facebook"></a></li>
+	                <li><a href="http://twitter.com/"  class="b-keep_in_touch__item__link--twitter" title="Twitter"></a></li>
+	            </ul>
+	           
+	        </div>
+	        
+	    </div>
+	</div>
+	<div class="copyright">
+	<hr>
+	    <div class="container" style="padding-left: 200px;"> &copy; 2015 Funday, Inc.</div>
+	</footer>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

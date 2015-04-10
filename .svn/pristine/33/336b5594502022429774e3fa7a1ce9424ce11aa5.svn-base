@@ -1,0 +1,6 @@
+package a2team.yang.jae.account.service;
+
+public interface AccountService{
+	
+	
+}

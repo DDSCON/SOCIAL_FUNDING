@@ -1,0 +1,445 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
+
+
+<script type="text/javascript">
+	$(document).ready(function() { //DOM이 준비되고
+		$('#loginButton').click(function() { // ID가 toggleButton인 요소를 클릭하면
+			var state = $('#loginIn').css('display'); // state 변수에 ID가 moreMenu인 요소의 display의 속성을 '대입'
+			if (state == 'none') { // state가 none 상태일경우 
+				$('#loginIn').show(); // ID가 moreMenu인 요소를 show();
+				$('#sign').hide();
+			} else { // 그 외에는
+				$('#loginIn').hide(); // ID가 moreMenu인 요소를 hide();
+
+			}
+		});
+	});
+</script>
+
+<script type="text/javascript">
+function newProject(){
+
+	
+	if(${empty sessionScope.email}){
+		$('#loginButton').trigger('click');
+		
+	} else {
+		location.replace('/newProject');
+	}
+	
+
+}
+</script>
+
+
+<script type="text/javascript">
+	$(document).ready(function() { //DOM이 준비되고
+		$('#signButton').click(function() { // ID가 toggleButton인 요소를 클릭하면
+			var state = $('#sign').css('display'); // state 변수에 ID가 moreMenu인 요소의 display의 속성을 '대입'
+			if (state == 'none') { // state가 none 상태일경우 
+				$('#sign').show(); // ID가 moreMenu인 요소를 show();
+				$('#loginIn').hide();
+			} else { // 그 외에는
+				$('#sign').hide(); // ID가 moreMenu인 요소를 hide();
+
+			}
+		});
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() { //DOM이 준비되고
+		$('#mypageButton').click(function() { // ID가 toggleButton인 요소를 클릭하면
+			var state = $('#myPage').css('display'); // state 변수에 ID가 moreMenu인 요소의 display의 속성을 '대입'
+			if (state == 'none') { // state가 none 상태일경우 
+				$('#myPage').show(); // ID가 moreMenu인 요소를 show();
+			}else{
+				$('#myPage').hide();
+			}
+		});
+	});
+</script>
+
+<script>
+	$(document).ready(function() {
+		Tumblbug.views.bNavGlobal();
+	});
+</script>
+
+<nav class="b-nav-global">
+
+	<ul class="b-nav-global__items">
+		<li
+			class="[ b-nav-global__item b-nav-global__item_primary_yes b-nav-global__item_type_brand ]">
+			<a href="/" class="logo ui-logo-global">a2teamlogo</a>
+		</li>
+		<li
+			class="[ b-nav-global__item b-nav-global__item_primary_yes b-nav-global__item_type_menu ]">
+			<ul
+				class="[ b-menu b-menu_horiz_yes b-menu_stroke_yes b-menu--ui_global-menu ]">
+				<li class="b-menu__item"><a href="/projectMain"
+					class="b-menu__item__link"> 프로젝트 찾아보기 </a></li>
+				
+				<li class="b-menu__item"><a href="javascript:newProject()"
+					class="b-menu__item__link"id="b-menu__item__link"> 프로젝트 만들기 </a></li>
+					
+				
+			</ul> <!-- end .b-menu -->
+		</li>
+		<li
+			class="[ b-nav-global__item b-nav-global__item_primary_no b-nav-global__item_type_search ] js-open-search-form">
+			<input type="checkbox" id="btn-002" class="i-icon-search" /> <label
+			for="btn-002" class="b-icon-search js-icon-search"> <span
+				class="b-icon-search__inner"></span>
+		</label>
+			<form accept-charset="UTF-8" action="/project"
+				class="b-nav-global__search js-main-search-form" method="get">
+				<div style="margin: 0; padding: 0; display: inline">
+					<input name="utf8" type="hidden" value="&#x2713;" />
+				</div>
+				<input class="b-nav-global__search__field js-search-project"
+					id="query" name="query" placeholder="프로젝트를 검색해보세요!" type="search"
+					value="" />
+			</form> <!-- end .b-nav-global__search -->
+		</li>
+		<li
+			class="[ b-nav-global__item b-nav-global__item_primary_no b-nav-global__item_type_user ]">
+			<ul class="[ b-menu b-menu_horiz_yes b-menu--ui_global-menu ] js-auth-menu">
+				<li class="b-menu__item">
+				<c:choose>
+						<c:when test="${not empty sessionScope.email}">
+ 	 						
+							
+							<a href="#" id="mypageButton"
+								class="b-menu__item__link logout_btn"
+								style="margin-top: 5px; width: 100px; padding-left: 0px;">
+								${sessionScope.name}님 
+						    </a>
+
+							<li class="b-menu__item">
+							<script type="text/javascript">
+								function logout() {
+									$.ajax({
+										url : "/logout",
+										type: "GET"
+									});
+									location.href = ""
+								};
+							</script> <a onclick="logout()"  id="logout"
+								class="b-menu__item__link logout_btn"
+								style="margin-top: 5px; width: 90px; padding-right: 0px;">로그아웃</a>
+
+							</li>
+							
+						</c:when>
+						<c:otherwise>
+
+							<a href="#" id="loginButton" name="loginButton" class="b-menu__item__link login_btn" style="margin-top: 1px;"  >로그인</a></li>
+				<li class="b-menu__item">
+				 	<a href="#" id="signButton" class="[ b-button b-button_size_s b-button_hollowed_yes  ] signup_btn"
+					 	style="margin-top: 15px; margin-left: 2px; margin-right: 2px; padding-bottom: 4px;"> 가입하기 </a></li>
+
+				</c:otherwise>
+				</c:choose>
+		</li>
+
+	</ul>
+	</li>
+	</ul>
+
+
+	<script type="text/javascript">
+		function login() {
+			var email = $('#email').val();
+			var pw = $('#pw').val();
+			$.ajax({
+				type : "POST",
+				url : "/login",
+				data : {
+					email : email,
+					pw : pw
+				},
+				dataType : "json"
+			//contentType: "application/json; charset=utf-8"
+			}).done(function(msg) {
+				if ('y' == msg.message) {
+					alert("로그인 성공");
+					$('#loginIn').hide();
+
+					location.href = "";
+
+				} else {
+					alert("회원이아닌경우 회원가입해주세요.");
+				}
+			});
+		}
+	</script>
+
+  <script type="text/javascript">
+ 	<script type="text/javascript">
+ 	$(function(){
+ 		$("#dialog").dialog();
+ 		
+ 	});
+ 	</script>
+<!-- LOGINUP --------------------------------------------------------------------------------------------------     -->
+
+<style>
+#loginIn {
+	display: none;
+	z-index: 1000;
+	position: relative;
+}
+</style>
+
+
+	<fieldset>
+	<div><br></div>
+		<div id="loginIn" class="loginIn"align="right" style="position: right absolute;">
+			<table>
+				<tr>
+					<td>이메일</td>
+					<td><input type="email" name="email" id="email" /></td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="password" name="pw" id="pw" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="right"><input type="button"  class="b-button js-submit-new-channel" value="로그인"
+						onclick="login()" style="float: right" /></td>
+				</tr>
+
+			</table>
+
+		</div>
+	</fieldset>
+	
+<!-- MYPAGE ---------------------------------------------------------------------------------------------- -->
+	
+	
+<style>
+#myPage {
+	display: none;
+	z-index: 1000;
+	position: relative;
+}
+</style>
+
+ 	 <fieldset>
+		<div id="myPage" align="right" style="position: right absolute;" class="[ b-menu b-menu_horiz_yes b-menu--ui_global-menu ] js-auth-menu">
+			<table>
+				<tr>
+					<td><a class="b-menu__item__link logout_btn"
+								style="margin-top: 5px; width: 130px; padding-right: 0px;" href="ourProjectView">나의 후훤현황</a></td>
+				</tr>
+				<tr>
+					<td><a class="b-menu__item__link logout_btn"
+								style="margin-top: 5px; width: 130px; padding-right: 0px;" href="myProjectView">나의 프로젝트</a></td>
+				</tr>
+				<tr>
+					<td><a class="b-menu__item__link logout_btn"
+								style="margin-top: 5px; width: 130px; padding-right: 0px;" href="profile1">나의 프로필  </a></td>
+				</tr>
+				<tr>
+					<td><a class="b-menu__item__link logout_btn"
+								style="margin-top: 5px; width: 130px; padding-right: 0px;" href="profile2">결제정보 설정</a></td>
+				</tr>
+			</table>
+		</div>
+	</fieldset>
+
+<!-- MYPAGE ---------------------------------------------------------------------------------------------- -->
+
+<!-- SIGNUP --------------------------------------------------------------------------------------------------  -->
+
+	<script type="text/javascript">
+		var count = 0;
+
+		function signup() {
+
+			var name = $('#name').val();
+			var email = $('#email1').val();
+			var pw = $('#pw1').val();
+
+			if (!$.trim($("#name").val())) {
+				alert("이름을 입력 하세요.");
+				return false;
+			}
+			if (!$.trim($("#email1").val())) {
+				alert("영문,숫자 입력 최대 입력단어 20자를 입력하세요.");
+				return false;
+			}
+			if (count == "0") {
+				alert("아이디 중복 체크를 해주세요.");
+				return false;
+
+			}
+			if (!$.trim($("#pw1").val())) {
+				alert("비밀번호를 입력 하세요.");
+				return false;
+			}
+			if (!$.trim($("#pw2").val())) {
+				alert("비밀번호 확인을 하세요.");
+				return false;
+			}
+
+			$.ajax({
+				type : "POST",
+				url : "/signup",
+				data : {
+
+					name : name,
+					email : email,
+					pw : pw
+
+				},
+				dataType : "json"
+			}).done(function(msg1) {
+				if ('y' == msg1.message) {
+					alert("회원가입 성공");
+					location.href = ""
+					$('#sign').hide();
+				}
+			});
+		}
+		function hideSign() {
+			$('#sign').hide();
+		}
+	</script>
+
+	<script>
+
+	function checkId() {
+		var email = $('#email1').val();
+		$.ajax({
+			type : "POST",
+			url : "/checkId",
+			data : {
+				email : email
+			},
+			dataType : "json"
+		}).done(function(msg2) {
+			if ('y' == msg2.message) {
+				alert("중복된 이메일입니다.");
+				$("#button").attr("disabled", true);
+				count = 0;
+			} else {
+				
+				if (confirm('사용할수 있는 아이디입니다.사용하시겠습니까?')) {
+					$("input[name = 'email1']").attr("readonly", true);
+					$("#button").attr("disabled", false);
+					count = 1;
+					
+				}else{
+				 		
+				}
+			}
+		});
+	}
+
+</script>
+<!-- 비밀번호 일치확인 --------------------------------------------------------------------------------- -->
+	<script>
+		function verifynotify(field1, field2, result_id, match_html,
+				nomatch_html) {
+			this.field1 = field1;
+			this.field2 = field2;
+			this.result_id = result_id;
+			this.match_html = match_html;
+			this.nomatch_html = nomatch_html;
+			this.check = function() {
+				if (!this.result_id) {
+					return false;
+				}
+				if (!document.getElementById) {
+					return false;
+				}
+				r = document.getElementById(this.result_id);
+				if (!r) {
+					return false;
+				}
+				if (this.field1.value != ""
+						&& this.field1.value == this.field2.value) {
+					r.innerHTML = this.match_html;
+				} else {
+					r.innerHTML = this.nomatch_html;
+				}
+			}
+		}
+		function verifyInput() {
+			verify = new verifynotify();
+			verify.field1 = document.password_form.pw1;
+			verify.field2 = document.password_form.pw2;
+			verify.result_id = "password_result";
+			verify.match_html = "<span style=\"color:blue\">패스워드가 확인되었습니다.<\/span>";
+			verify.nomatch_html = "<span style=\"color:red\">패스워드를 정확하게 입력하세요.<\/span>";
+			// Update the result message
+			verify.check();
+		}
+		function addLoadEvent(func) {
+			var oldonload = window.onload;
+			if (typeof window.onload != 'function') {
+				window.onload = func;
+			} else {
+				window.onload = function() {
+					if (oldonload) {
+						oldonload();
+					}
+					func();
+				}
+			}
+		}
+		addLoadEvent(function() {
+			verifyInput();
+		});
+	</script>
+
+	<!-- 비밀번호 일치확인 --------------------------------------------------------------------------------- -->
+
+<style>
+#sign {
+	display: none;
+	z-index: 1000;
+	position: relative;
+}
+</style>
+		<div id="sign" class="sign"align="right" style="position: right absolute;">
+			<table>
+				<tr>
+					<td>이름 : <input type="text" name="name" id="name"></td>
+				</tr>
+				<tr>
+					<td>이메일 : <input type="email" name="email1" id="email1" required></td>
+					<td>		<input type="button" name="check"  class="b-button js-submit-new-channel" value="EMAIL중복확인" id="check" onclick="checkId()">
+								<input type="hidden" name="chk_Id" id="chk_Id" value="0">
+					</td>
+					 	 	 
+				</tr>
+				<tr>
+					<td>
+						<form name="password_form">
+		 	 	 	 	 	비밀번호 : <input type="password" name="pw1" id="pw1" onkeyup="verify.check()"><br>
+		 	 	 	 	 	비밀번호 확인 : <input type="password" name="pw2" id="pw2" onkeyup="verify.check()"></br>
+		 	 	 	 	 	<p>
+		 	 	 	 	 	<div id="password_result" style="position: center"> </div>
+		 	 	 	 	</form>
+ 	 	 	 		</td>
+ 	 	 	 	</tr>
+ 	 	 	 	<tr>	
+				 	<td><input type="button" value="회원가입" class="b-button js-submit-new-channel" id="button" style="float: right" onclick="signup()" >
+				 	</td>
+				 	<td><input type="button" value="취소" class="b-button js-submit-new-channel" style="float: right" onclick="hideSign()">
+				    </td>
+				</tr>
+			</table>
+			
+					
+		</div>
+
+</nav>

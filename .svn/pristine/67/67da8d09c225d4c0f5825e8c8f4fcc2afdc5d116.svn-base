@@ -1,0 +1,177 @@
+CREATE DATABASE a2team;
+
+CREATE TABLE `board` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `title` varchar(60) NOT NULL,
+  `content` varchar(5000) NOT NULL,
+  `author` varchar(30) NOT NULL,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `category` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `member` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `email` varchar(20) NOT NULL,
+  `email_check` varchar(20) DEFAULT NULL,
+  `pw` varchar(20) NOT NULL,
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `member_deli` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `m_seq` int(11) DEFAULT NULL,
+  `addr` varchar(20) DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `member_detail` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `m_seq` int(11) DEFAULT NULL,
+  `sns` varchar(20) DEFAULT NULL,
+  `addr` varchar(20) DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `team_no` int(11) DEFAULT NULL,
+  PRIMARY KEY (`seq`),
+  KEY `selectmember_ibfk_1` (`m_seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `member_payinfo` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `m_seq` varchar(3) NOT NULL,
+  `card_company` varchar(20) NOT NULL,
+  `card_company_code` varchar(3) NOT NULL,
+  `card_num` varchar(16) NOT NULL,
+  `card_expire_month` varchar(2) NOT NULL,
+  `card_expire_year` varchar(4) NOT NULL,
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `message` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `m_seq` int(11) NOT NULL,
+  `p_seq` int(11) NOT NULL,
+  `recipient` varchar(10) NOT NULL,
+  `context` varchar(1000) NOT NULL,
+  `read_state` tinyint(1) NOT NULL,
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `payment` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `m_seq` int(11) NOT NULL,
+  `p_seq` int(11) NOT NULL,
+  `o_seq` int(11) NOT NULL,
+  `pay_money` int(11) NOT NULL,
+  `card_company` varchar(20) NOT NULL,
+  `card_company_code` varchar(3) NOT NULL,
+  `card_num` varchar(16) NOT NULL,
+  `card_expire_month` varchar(2) NOT NULL,
+  `card_expire_year` varchar(4) NOT NULL,
+  `pay_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `project` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `m_seq` int(11) DEFAULT NULL,
+  `image` varchar(200) DEFAULT NULL,
+  `c_image` varchar(200) DEFAULT NULL,
+  `title` varchar(60) NOT NULL,
+  `blurb` varchar(160) NOT NULL,
+  `category` varchar(20) NOT NULL,
+  `location_address` varchar(60) DEFAULT NULL,
+  `location` varchar(60) DEFAULT NULL,
+  `f_duration` varchar(20) NOT NULL,
+  `f_year` varchar(20) DEFAULT NULL,
+  `f_goal` varchar(20) NOT NULL,
+  `video` varchar(200) DEFAULT NULL,
+  `c_video` varchar(200) DEFAULT NULL,
+  `description` varchar(5000) DEFAULT NULL,
+  `risk_and_challenge` varchar(1000) DEFAULT NULL,
+  `web_site` varchar(200) DEFAULT NULL,
+  `contact_detail_email` varchar(50) DEFAULT NULL,
+  `contact_detail_phone` varchar(20) DEFAULT NULL,
+  `t_seq` int(11) DEFAULT NULL,
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `facebook` varchar(80) DEFAULT NULL,
+  `f_month` varchar(20) DEFAULT NULL,
+  `f_day` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`seq`),
+  KEY `t_seq` (`t_seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+
+CREATE TABLE `project_comment` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `p_seq` int(11) DEFAULT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `comment` varchar(1000) DEFAULT NULL,
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `project_option` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `p_seq` int(11) NOT NULL,
+  `o_money0` varchar(10) DEFAULT '0',
+  `o_description0` varchar(100) DEFAULT '없음',
+  `o_money1` varchar(10) DEFAULT '0',
+  `o_description1` varchar(100) DEFAULT '없음',
+  `o_money2` varchar(10) DEFAULT '0',
+  `o_description2` varchar(100) DEFAULT '없음',
+  `o_money3` varchar(10) DEFAULT '0',
+  `o_description3` varchar(100) DEFAULT '없음',
+  `o_money4` varchar(10) DEFAULT '0',
+  `o_description4` varchar(100) DEFAULT '없음',
+  `o_year` varchar(4) NOT NULL,
+  `o_month` varchar(2) NOT NULL,
+  `o_day` varchar(2) NOT NULL,
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `project_update` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `p_seq` int(11) DEFAULT NULL,
+  `description` varchar(5000) DEFAULT NULL,
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `recruit` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) NOT NULL,
+  `content` varchar(5000) NOT NULL,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `remember` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `m_seq` int(11) DEFAULT NULL,
+  `p_seq` int(11) DEFAULT NULL,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `team` (
+  `seq` int(11) NOT NULL AUTO_INCREMENT,
+  `team_name` varchar(50) DEFAULT NULL,
+  `team_Biography` varchar(1000) DEFAULT NULL,
+  `profile_photo` varchar(200) DEFAULT NULL,
+  `c_profile_photo` varchar(200) DEFAULT NULL,
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;

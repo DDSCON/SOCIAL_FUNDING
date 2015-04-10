@@ -1,0 +1,193 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<jsp:include page="../main/header.jsp"></jsp:include>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<jsp:include page="../main/top.jsp"></jsp:include>
+	<div class="b-flag is_dent">
+		<div class="container">
+
+			<div style="left: 0px" class="b-valign  b-valign--origin-left">
+				<div class="b-valign__inner">
+					<h2 class="headline is_vaporable"
+						style="opacity: 3.21428576878139;">지불정보 설정</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- -------------------------------------------------------------------------------------------------------------- -->
+
+	<div class="b-content b-content--clean">
+		<div class="container">
+
+
+			<div class="b-main " id="" role="main">
+
+
+				<form accept-charset="UTF-8" action="/ko/users/79005/update_payment"
+					class="edit_user" id="edit_user_79005" method="post">
+					<div style="margin: 0; padding: 0; display: inline">
+						<input name="utf8" type="hidden" value="✓"><input
+							name="_method" type="hidden" value="put"><input
+							name="authenticity_token" type="hidden"
+							value="k+020Xvkc3OiyfoZ+gwypsw1rxPTPU2vRpyfkJtZth8=">
+					</div>
+					<!-- todo -->
+
+					<h4 class="b-payment_head is_first">사용하실 결제 수단을 선택해주세요</h4>
+
+					<div class="row has-gap-bottom-dot5">
+						<ul id="payment_method_select" class="js-selectbox" tabindex="1"
+							style="display: none;">
+							<li><a href="/ko/users/79005/payment/0/mode/form"
+								class="js-select-card" data-remote="true" id="domestic_card">체크/신용카드</a>
+							</li>
+						</ul>
+						<a href="#" id="payment_method_select-button"
+							class="b-select b-select--basic js-select-card" role="button"
+							style="width: 144px;"> <span class="b-select__current">
+								체크/신용카드 </span> <span class="b-select__icon"></span>
+						</a>
+					</div>
+
+					<div id="cardpayment">
+						<div class="[ b-panel b-panel--rounded_yes b-panel--paycard ]">
+							<div class="b-panel__head"></div>
+							<div class="b-panel__body">
+
+								<fieldset class="credit_card">
+									<legend>카드 정보를 입력해주세요</legend>
+
+									<div class="b-form">
+										<div class="b-form__item">
+											<select class="credit_card-card_select"
+												id="user_cardpayment_attributes_cardtype"
+												name="user[cardpayment_attributes][cardtype]" tabindex="2"
+												aria-hidden="true" style="display: none;"><option
+													value="200" selected="selected">국민카드</option>
+												<option value="300">외환카드</option>
+												<option value="100">비씨카드</option>
+												<option value="900">롯데카드</option>
+												<option value="600">신한카드</option>
+												<option value="201">농협카드</option>
+												<option value="310">하나카드</option>
+												<option value="400">삼성카드</option></select><br>
+											<br> <span class="b-form__help"> 법인공용카드(임직원 카드는
+												가능), 롯데체크카드는 지원하지 않습니다 </span>
+										</div>
+
+
+										<div class="b-form">
+											<label class="b-form__label"
+												for="user_cardpayment_attributes_카드 번호">카드 번호</label>
+											<div class="b-form__item" style="position: relative;">
+												<input class="[ form-field form-field--theme_clean col5 ]"
+													id="cardno_proxy"
+													name="user[cardpayment_attributes][cardno_proxy]" size="16"
+													tabindex="2" type="tel" value="" title="">
+												<div class="c-tooltip "
+													style="width: 220px; top: 85px; left: inherit; right: 26px; display: none;">
+													<span class="c-tooltip__text">카드 번호 인증이 완료되었습니다.</span> <span
+														class="c-tooltip__tip"></span>
+												</div>
+											</div>
+										</div>
+
+										<div class="b-form">
+											<label class="b-form__label"
+												for="user_cardpayment_attributes_유효기간">유효기간</label>
+											<div class="b-form__item">
+												<select class="credit_card__input--expiry_month"
+													id="card_expire_month_select"
+													name="user[cardpayment_attributes][cardexpiremonth]"
+													tabindex="2" aria-hidden="true" style="display: none;"><option
+														value="---" selected="selected">---</option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="5">5</option>
+													<option value="6">6</option>
+													<option value="7">7</option>
+													<option value="8">8</option>
+													<option value="9">9</option>
+													<option value="10">10</option>
+													<option value="11">11</option>
+													<option value="12">12</option></select> <select
+													class="credit_card__input--expiry_year"
+													id="card_expire_year_select"
+													name="user[cardpayment_attributes][cardexpireyear]"
+													tabindex="2" aria-hidden="true" style="display: none;"><option
+														value="---" selected="selected">---</option>
+													<option value="2015">2015</option>
+													<option value="2016">2016</option>
+													<option value="2017">2017</option>
+													<option value="2018">2018</option>
+													<option value="2019">2019</option>
+													<option value="2020">2020</option>
+													<option value="2021">2021</option>
+													<option value="2022">2022</option>
+													<option value="2023">2023</option>
+													<option value="2024">2024</option>
+													<option value="2025">2025</option></select>
+											</div>
+
+										</div>
+
+
+									</div>
+							</div>
+
+						</div>
+
+
+
+						<script>
+							$(document)
+									.ready(
+											function(e) {
+												Tumblbug.views
+														.payment_form_view({
+															initial_selected : 'domestic_card',
+															mode : 'user',
+															is_ie7 : false,
+															card_select_element : $('#user_cardpayment_attributes_cardtype'),
+															card_month_select_element : $("#card_expire_month_select"),
+															card_year_select_element : $("#card_expire_year_select")
+														});
+											});
+						</script>
+
+
+
+						<div class="b-form-list has-no-border">
+							<label class="b-form__label" for="user_phone1"> 휴대폰 번호 </label>
+							<div class="b-form__item">
+								<input class="[ form-field ] col-8 id="
+									user_phone1" name="user[phone1]" type="tel" value="">
+							</div>
+							<p class="b-form__help">오직 출금알림과 후원선물 배송을 위해서만 사용됩니다.</p>
+						</div>
+						<div class="b-form-list">
+							<div class="b-form__label"></div>
+							<div class="b-form__item">
+								<input class="b-button b-button_size_l" name="commit"
+									tabindex="4" type="submit" value="수정하기">
+							</div>
+						</div>
+				</form>
+
+			</div>
+
+
+		</div>
+	</div>
+
+	<jsp:include page="../main/footer.jsp"></jsp:include>
+</body>
+</html>

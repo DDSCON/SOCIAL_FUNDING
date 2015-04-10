@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a2team.yang.jae.account.mybatis.AccountMapper">
+
+	<select id="getAllMember" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		SELECT seq
+		FROM member
+
+		WHERE email = #{email}
+	
+	</select>
+	
+		<select id="getPayInfo" resultType="java.util.HashMap"	parameterType="java.util.HashMap">
+		SELECT * 
+		FROM member_payinfo 
+		LEFT JOIN member on member_payinfo.m_seq = member.seq
+		<if test="email != null">
+			WHERE member.email = #{email}
+		</if>
+	</select>
+	
+	<update id="updataMember_pw" parameterType="java.util.HashMap">
+	UPDATE member SET 
+		pw = #{pw}
+		
+		WHERE seq = #{seq}
+	</update>
+	
+	<update id="updataMember_detail" parameterType="java.util.HashMap">
+		UPDATE member_detail SET 
+		addr = #{addr}
+		,addr_detail = #{addr_detail}
+		,sns= #{sns}
+		,phone= #{phone} 
+		WHERE m_seq = #{seq}
+	</update>
+	
+	<update id="updata_card_payinfo" parameterType="java.util.HashMap">
+		UPDATE member_payinfo SET 
+		card_company = #{card_company}
+		,card_company_code = #{card_company_code}
+		,card_number = #{card_number}
+		,card_expire_month = #{card_expire_month} 
+		,card_expire_year = #{card_expire_year} 
+		WHERE m_seq = #{seq}
+	</update>
+	
+	
+		<select id="getMemberDetail" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		SELECT *
+		FROM member_detail
+		LEFT JOIN member on member_detail.m_seq = member.seq
+		<if test="email != null">
+			WHERE email = #{email}
+		</if>
+	
+	</select>
+	
+	
+	<select id="getProjectView" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT *, format(funded, 0) AS funded_money, format(f_goal, 0) AS f_goal_money, datediff(f_duration, dateNow) as d_day
+		FROM myproject_view
+		<if test="null != m_seq">
+	    WHERE m_seq = #{m_seq}
+	    </if>
+	      ORDER BY d_day asc
+	</select>
+	
+	
+	<select id="getContributer" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT 
+	
+		payment.m_seq
+		,payment.p_seq
+		,option_no
+		,pay_money
+		,card_company
+		,card_company_code
+		,cardnumber
+		,cardexpiremonth
+		,cardexpireyear
+		,name
+		,email
+			
+		,addr
+		,addr_detail				
+
+    	,o_description0
+    	,o_description1
+    	,o_description2
+    	,o_description3
+    	,o_description4
+
+    
+    	, DATE_FORMAT(pay_date, '%Y-%m-%d') AS pay_date
+		
+		FROM payment
+		LEFT JOIN member on payment.m_seq = member.seq
+		LEFT JOIN member_detail on payment.m_seq = member_detail.m_seq
+    	LEFT JOIN project_option on payment.p_seq = project_option.p_seq
+
+		<if test="null != p_seq">
+	    WHERE payment.p_seq = #{p_seq}
+	    </if>
+	     ORDER BY payment.option_no desc, payment.pay_money desc
+	 
+	</select>
+	
+
+	
+	
+	<select id="getOurProjectView" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT *
+		FROM status_view2
+		LEFT JOIN member
+		ON member.seq = status_view2.m_p_seq
+		<if test="m_seq != null">
+			WHERE m_seq = #{m_seq}
+		</if>
+	</select>
+	
+	<select id="getOurProjectView1" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT *, sum(pay_money) as funded, format(100*sum(pay_money)/f_goal, 0) as current_rate, count(*) as count
+		FROM status_view2
+		<if test="m_seq != null">
+			WHERE m_seq = #{m_seq}
+		</if>
+		AND d_day >= 0
+		GROUP BY p_seq
+	</select>
+	<select id="getOurProjectView2" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT *, sum(pay_money) as funded, format(100*sum(pay_money)/f_goal, 0) as current_rate, count(*) as count
+		FROM status_view2
+		<if test="m_seq != null">
+			WHERE m_seq = #{m_seq}
+		</if>
+		AND 0 > d_day
+		GROUP BY p_seq
+	</select>
+	
+		<select id="getMessage" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	
+	select * from message 
+	left join member on message.m_seq = member.seq
+	left join project on message.p_seq = project.seq
+	
+	<if test="null != p_seq">
+	WHERE project.seq = #{p_seq}
+  	</if>
+	ORDER BY message.reg_date asc
+	
+	
+	</select>
+	
+	
+		<insert id="sendMessage" parameterType="java.util.HashMap">
+		INSERT INTO message (
+		m_seq
+		,p_seq
+		,recipient
+		,context
+		) VALUES (
+		#{m_seq}
+		,#{p_seq}
+		,#{recipient}
+		,#{context}
+		)
+		</insert>
+	
+	
+</mapper>

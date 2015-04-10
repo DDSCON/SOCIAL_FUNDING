@@ -1,0 +1,188 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.List"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<jsp:include page="../main/header.jsp"></jsp:include>
+<title>펀데이 찾아보기</title>
+<style type="text/css">
+	.category-list{
+		text-align: center;
+		list-style-type: none;
+		padding: 15px;
+		background-color: #f9f9f7;
+	}
+	.category-list li{
+		display: inline;
+		padding: 4px;
+	}
+	.category-list a{
+		background-color: #f9f9f7;
+		display: inline-block;
+		padding: 10px;
+		font-family: "RixSGo B","Apple SD Gothic Neo","MalgunGothic","Dotum";
+		font-size: 26px;
+		margin: 5px;
+	}
+	.js-isotope {
+		width: 900px;
+		margin: 0 auto;
+		padding: 5px 10px;
+	}
+
+</style>
+<link rel="stylesheet" type="text/css" href="/resources/css/projectCard.css">
+<script type="text/javascript" src="/resources/js/isotope.pkgd.min.js"></script>
+
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-wip/js/bootstrap.min.js"></script>
+<script src="/resources/bootstrap/js/bootstrap-select.js"></script>
+
+<link href="/resources/bootstrap/css/bootstrap-select.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+</head>
+<body>
+	<jsp:include page="../main/top.jsp"></jsp:include>
+	<div class="category-list">
+		<ul class="js-isotope" id="category_list" data-isotope-options='{ "layoutMode": "fitRows", "itemSelector": ".item" }'>
+			<c:forEach var="i" items="${category}">
+			<li>
+				<a class="category-list-link item" href="/projectCategory?category=${i.name}"><c:out value="${i.name}"/></a>
+			</li>
+			</c:forEach>
+		</ul>
+	</div>
+	<div class="newProject">
+		<div class="mini-header">
+			<span>최신 프로젝트</span> <a class="mini-header-link" href="#">더보기</a>
+		</div>
+		<div class="project-list">
+			<ul class="item-list">
+				<c:forEach var="map" items="${newProjectCard}">
+					<li>
+						<div class="project-card">
+							<a class="item-list-link" href="/projectInfo?seq=${map.seq}">
+								<img alt="not yet" src="/resources/images/${map.c_image}.jpg" onError="this.src='/resources/images/1.jpg';"/>
+							<div class="content">
+								<p>${map.title}</p>
+								<p>${map.blurb}</p>
+							</div>
+							<div class="funded-status">
+								&#8361;${map.funded_money}/&#8361;${map.f_goal_money}</br>
+								${100*map.funded/map.f_goal}%
+							</div>
+							<div class="stat">
+								<span style="width: ${100*map.funded/map.f_goal}%;"></span>
+							</div>
+							<div class="funded-people">
+								<span>
+									<c:choose>
+										<c:when test="${map.d_day < '0'}">
+											종료된 프로젝트
+										</c:when>
+										<c:otherwise>
+											${map.d_day} 일 남음
+										</c:otherwise>
+									</c:choose>
+								</span>
+								${map.count}명 후원중
+							</div>
+							</a>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
+	<div class="popProject">
+		<div class="mini-header">
+			<span>인기 프로젝트</span> <a class="mini-header-link" href="#">더보기</a>
+		</div>
+		<div class="project-list">
+			<ul class="item-list">
+				<c:forEach var="map" items="${projectCard}">
+					<li>
+						<div class="project-card">
+							<a class="item-list-link" href="/projectInfo?seq=${map.seq}">
+								<img alt="not yet" src="/resources/images/${map.c_image}.jpg" onError="this.src='/resources/images/1.jpg';"/>
+							<div class="content">
+								<p>${map.title}</p>
+								<p>${map.blurb}</p>
+							</div>
+							<div class="funded-status">
+								&#8361;${map.funded_money}/&#8361;${map.f_goal_money}</br>
+								${100*map.funded/map.f_goal}%
+							</div>
+							<div class="stat">
+								<span style="width: ${100*map.funded/map.f_goal}%;"></span>
+							</div>
+							<div class="funded-people">
+								<span>
+									<c:choose>
+										<c:when test="${map.d_day < '0'}">
+											종료된 프로젝트
+										</c:when>
+										<c:otherwise>
+											${map.d_day} 일 남음
+										</c:otherwise>
+									</c:choose>
+								</span>
+								${map.count}명 후원중
+							</div>
+							</a>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
+	<div class="mostProject">
+		<div class="mini-header">
+			<span>후원자가 많은 프로젝트</span> <a class="mini-header-link" href="#">더보기</a>
+		</div>
+		<div class="project-list">
+			<ul class="item-list">
+				<c:forEach var="map" items="${mostProjectCard}">
+					<li>
+						<div class="project-card">
+							<a class="item-list-link" href="/projectInfo?seq=${map.seq}">
+								<img alt="not yet" src="/resources/images/${map.c_image}.jpg" onError="this.src='/resources/images/1.jpg';"/>
+							<div class="content">
+								<p>${map.title}</p>
+								<p>${map.blurb}</p>
+							</div>
+							<div class="funded-status">
+								&#8361;${map.funded_money}/&#8361;${map.f_goal_money}</br>
+								${100*map.funded/map.f_goal}%
+							</div>
+							<div class="stat">
+								<span style="width: ${100*map.funded/map.f_goal}%;"></span>
+							</div>
+							<div class="funded-people">
+								<span>
+									<c:choose>
+										<c:when test="${map.d_day < '0'}">
+											종료된 프로젝트
+										</c:when>
+										<c:otherwise>
+											${map.d_day} 일 남음
+										</c:otherwise>
+									</c:choose>
+								</span>
+								${map.count}명 후원중
+							</div>
+							</a>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
+	</div>
+	
+	<br>
+	<br>
+	<jsp:include page="../main/footer.jsp"></jsp:include>
+</body>
+</html>

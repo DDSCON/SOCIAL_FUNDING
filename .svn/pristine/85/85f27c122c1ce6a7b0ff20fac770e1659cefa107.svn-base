@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a2team.yang.jae.member.mybatis.AccountMapper">
+
+	<select id="getAllMember" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		SELECT seq
+		, name
+		, email
+		, pw
+		FROM member
+		WHERE 1 = 1
+		<if test="null != seq">
+			AND seq = #{seq}
+		</if>
+		<if test="null != email">
+			AND email = #{email}
+		</if>
+		<if test="null != pw">
+			AND pw = #{pw}
+		</if>
+	</select>
+
+</mapper>

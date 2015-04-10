@@ -1,0 +1,5 @@
+package a2team.yang.jae.account.mybatis;
+
+public interface AccountMapper{
+	
+}

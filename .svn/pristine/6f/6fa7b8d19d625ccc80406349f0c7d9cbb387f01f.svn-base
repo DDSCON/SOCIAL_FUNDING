@@ -1,0 +1,138 @@
+/* footer */
+.b-keep_in_touch__item__link--facebook,
+	.b-keep_in_touch__item__link--twitter {
+	background: transparent url() 0 0 no-repeat;
+	display: inline-block;
+	width: 36px;
+	height: 36px;
+	background-image:
+		url(https://d1pqmsyqo4bi9.cloudfront.net/assets/icons/foot_channels-03c71ded3d047af37412add93a7ba2ca.png);
+	text-indent: -99999px
+}
+.b-keep_in_touch__item {
+	
+	margin-left: 10px;
+	list-style-type: none
+}
+.b-keep_in_touch {
+	margin-top: 0
+}
+.b-keep_in_touch__item__link--facebook:hover {
+	background-position: 0 -72px
+}
+.b-keep_in_touch__item__link--twitter {
+	background-position: 0 -144px
+}
+.b-keep_in_touch__item__link--twitter:hover {
+	background-position: 0 -216px
+}
+.b-keep_in_touch__item__link--facebook {
+	background: transparent url() 0 0 no-repeat;
+	display: inline-block;
+	width: 36px;
+	height: 36px;
+	background-image:
+		url(https://d1pqmsyqo4bi9.cloudfront.net/assets/icons/foot_channels-03c71ded3d047af37412add93a7ba2ca.png);
+	text-indent: -99999px
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2) , only screen and
+		(min--moz-device-pixel-ratio: 2) , only screen and
+		(-o-min-device-pixel-ratio: 2 / 1) , only screen and
+		(min-device-pixel-ratio: 2) , only screen and (min-resolution: 192dpi)
+		, only screen and (min-resolution: 2dppx) {
+	
+		.b-keep_in_touch__item__link--twitter {
+		background-image:
+			url(https://d1pqmsyqo4bi9.cloudfront.net/assets/icons/foot_channels@2x-ec97e91bc50707695b655eebe61ed4f2.png);
+		-webkit-background-size: 36px auto;
+		-moz-background-size: 36px auto;
+		-o-background-size: 36px auto;
+		background-size: 36px auto
+	}
+}
+a:hover{
+ color:#858585;
+color:#fff;
+text-decoration: none;
+}
+a{
+ color:#858585;
+}
+ol
+{
+ color:#858585;
+  width: 30em;  /* room for 3 columns */
+}
+ol li
+{
+ color:#858585;
+	list-style: none;
+  float: left;
+  width: 10em;  /* accommodate the widest item */
+}
+/* stop the floating after the list */
+br
+{
+  clear: left;
+}
+/* separate the list from what follows it */
+div.wrapper
+{
+  margin-bottom: 1em;
+}
+/* anchor styling */
+.Column ol li a
+{
+
+ color:#858585;
+list-style:none;
+  display: block;
+  width: 7em;
+  text-decoration: none;
+}
+ol li a:hover
+{
+ color:#858585;
+  color: #FFF; /* white */
+}
+
+#Footer
+{
+color:#FFF;
+ background-color:#353030;
+ width:100%;
+ padding-bottom:23px;
+ padding-top:100px;
+ 
+}
+.footer_bottom{
+ color:#858585;
+ width:100%;
+ padding-left: 400px;
+  
+}
+.list_center{
+	text-align: left;
+	
+    padding-left: 92px;
+	
+}
+
+
+.Column
+{
+
+text-align:center;
+    height: 300px;
+
+ display:inline-table;
+ width:17%;
+}
+.Column a
+{
+ display:block;
+}
+.Column p
+{
+ text-align:center;
+}

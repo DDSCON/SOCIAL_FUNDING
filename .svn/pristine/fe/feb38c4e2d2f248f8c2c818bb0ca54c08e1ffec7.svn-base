@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="a2team.yang.jae.member.mybatis.MemberMapper">
+
+	<select id="getAllMember" resultType="java.util.HashMap"
+		parameterType="java.util.HashMap">
+		SELECT seq
+		, name
+		, email
+		, pw
+		FROM member
+		WHERE 1 = 1
+		<if test="null != seq">
+			AND seq = #{seq}
+		</if>
+		<if test="null != email">
+			AND email = #{email}
+		</if>
+		<if test="null != pw">
+			AND pw = #{pw}
+		</if>
+	</select>
+
+	<insert id="insertMember" parameterType="java.util.HashMap">
+		INSERT INTO member (
+		name
+		,id
+		,password
+		,phone
+		) VALUES (
+		#{name}
+		,#{id}
+		,#{password}
+		,#{phone}
+		)
+	</insert>
+
+	<update id="updateMember" parameterType="java.util.HashMap">
+		UPDATE member SET
+		name =
+		#{name}
+		,id = #{id}
+		,password = #{password}
+		,phone = #{phone}
+		WHERE seq =
+		#{seq}
+	</update>
+
+	<delete id="deleteMember" parameterType="java.util.HashMap">
+		DELETE FROM member
+		WHERE
+		seq = #{seq}
+	</delete>
+
+	<select id="login" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM member
+		WHERE email = #{email}
+		AND pw = #{pw}
+	</select>
+
+	<select id="checkId" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM member
+		WHERE email = #{email}
+	</select>
+	<select id="selname" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	 	SELECT *
+		FROM member
+		WHERE email = #{email}
+	</select>
+	
+
+	<insert id="signup" parameterType="java.util.HashMap">
+		INSERT INTO member(
+		name
+		,email
+		,pw
+		)VALUES (
+		#{name}
+		,#{email}
+		,#{pw}
+		)
+	</insert>
+	<insert id="signup_detail" parameterType="java.util.HashMap">
+	 	INSERT INTO member_detail(
+	 	m_seq
+	 	)VALUES(
+	 	(SELECT MAX(seq) FROM member)
+	 	)
+	</insert>
+	
+  	<insert id="payinfo_detail" parameterType="java.util.HashMap">
+	 	INSERT INTO member_payinfo(
+	 	m_seq
+	 	)VALUES(
+	 	(SELECT MAX(seq) FROM member)
+	 	)
+	</insert>
+
+
+</mapper>
