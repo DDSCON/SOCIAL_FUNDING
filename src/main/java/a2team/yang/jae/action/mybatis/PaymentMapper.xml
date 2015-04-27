@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT *, sum(pay_money) AS funded, format(sum(pay_money), 0) AS funded_money, format(f_goal, 0) AS f_goal_money, datediff(f_duration, Now()) as d_day
 		,format((100*sum(pay_money)/f_goal), 0) AS current_rate
 		,count(*) AS count
-		FROM STATUS_VIEW2
+		FROM status_view2
 		<if test="null != p_seq">
 	    WHERE seq = #{p_seq}
 	    </if>
